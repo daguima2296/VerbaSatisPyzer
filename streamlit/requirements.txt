@@ -1,0 +1,17 @@
+pandas
+numpy==1.19.5
+plotly
+streamlit-option-menu
+matplotlib
+wordcloud
+spacy
+scikit-learn
+spacy-streamlit
+https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.5.0/fr_core_news_sm-3.5.0.tar.gz#egg=fr_core_news_sm
+joblib
+shap
+streamlit-shap
+keras
+tensorflow
+streamlit-chat
+emoji
