@@ -566,7 +566,7 @@ elif page == "Modélisation":
             st.write("Classification Report:")
             st.table(classification_report)
         # Sélection des options
-        selected_options = st.multiselect("Sélectionnez l'option (les options)", options,['Regression Logistique'])
+        selected_options = st.multiselect("Sélectionnez l'option (les options)", options,['Régression Logistique'])
 
         # Affichage du texte en fonction des options sélectionnées
         num_options = len(selected_options)
