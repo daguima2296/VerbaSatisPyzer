@@ -1280,6 +1280,8 @@ elif page == "Chatbot":
         </style>
     """, unsafe_allow_html=True)
     st.markdown("<form action='https://verbasatispyzer-botty.streamlit.app/'><button class='button-64 center' role='button'><span class='text'>Lien ChatBot</span></button></form>", unsafe_allow_html=True)
+    st.markdown("<a href='https://verbasatispyzer-botty.streamlit.app/'><button class='button-64 center' role='button'><span class='text'>Lien ChatBot</span></button></a>", unsafe_allow_html=True)
+
 elif page == "Conclusion et Perspectives":
     st.runtime.legacy_caching.clear_cache()
     st.markdown("<h4 class='center'>Conclusion</h4>",unsafe_allow_html=True)
