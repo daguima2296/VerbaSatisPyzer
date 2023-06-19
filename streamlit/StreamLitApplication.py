@@ -189,7 +189,7 @@ elif page == "Analyse exploratoire":
     site_counts = pd.DataFrame({"Site":
         df['Site'].value_counts(normalize=True) * 100})
     # Créer un diagramme à barres à partir des données du nouveau DataFrame
-    fig3 = go.Figure(data=[go.Bar(x=site_counts.index, y=site_counts['Site'], marker_color=["#E42D95", "#E42D3A", "#E47C2D",
+    fig3 = go.Figure(data=[go.Bar(x=site_counts.index, y=site_counts['Site'], marker_color=["#16A82F", "#E42D3A", "#E47C2D",
                      "#E4D82D"], text=site_counts['Site'].round(2).astype(str) + '%', textposition='outside', textfont=dict(size=14))])
     # Définir le titre et les étiquettes des axes
     fig3.update_layout(title='Répartition des sites', xaxis_title='Site',
@@ -231,7 +231,7 @@ elif page == "Analyse exploratoire":
                 name="Global",
                 jitter=0.3,
                 marker_color='#4C7CDB',
-                line_color='#D82DE4',
+                line_color='#4C7CDB',
                 boxmean=True
             ))
         for j,i in enumerate(TabSites):
