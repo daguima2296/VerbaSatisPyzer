@@ -532,7 +532,7 @@ elif page == "Modélisation":
         st.plotly_chart(fig1, use_container_width=True)
 
         st.write("La modélisation a été effectuée en utilisant la technique de recherche sur grille (grid search) pour determiner les meilleurs hyperparamètres de chaque modèle évalué. Les modèles testés comprenaient la régression logistique, le réseau de neurones, la méthode des k plus proches voisins(KNN), les machines à vecteurs de support (SVM), les forêts aléatoires (random forest) et les arbres de décision.")
-        st.write("Les résultats obrenus pour chaque modèle sont les suivants:")
+        st.write("Les résultats obtenus pour chaque modèle sont les suivants:")
         # Options
         options = ['Regression Logistique', 'Reseau de Neuronne', 'KNN', 'SVM','Foret Aléatoire',"Arbre de décision"]
         def Data(option):
