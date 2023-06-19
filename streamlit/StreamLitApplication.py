@@ -39,7 +39,9 @@ st.markdown(
         }
     </style>
 """, unsafe_allow_html=True)
-st.markdown('<h1 class="center">Supply Chain - Satisfaction des clients</h1>',
+st.markdown('<h1 class="center">VerbaSatisPyzer</h1>',
+            unsafe_allow_html=True)
+st.markdown('<h5 class="center">Supply Chain - Satisfaction des clients</h5>',
             unsafe_allow_html=True)
 page = "Accueil"
 page = option_menu(None, ["Accueil","Données","Analyse exploratoire", "Modélisation", "Chatbot","Conclusion et Perspectives"],
