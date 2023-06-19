@@ -1224,7 +1224,10 @@ style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: a
         st.dataframe(styled_df)
 elif page == "Chatbot":
     st.runtime.legacy_caching.clear_cache()
-    st.write("Petite présentation du fonctionnement du chat bot")
+    st.markdown("<h4 class='center'>Cas pratique de l’analyse des verbatims : création d’un chatbot</h4>",unsafe_allow_html=True)
+    st.write("L'objectif principal du chatbot est d'utiliser les résultats du modèle de bagging pour analyser la réponse du client, classifier son commentaire comme étant positif ou négatif, et identifier le cluster auquel il appartient.")
+    st.write("Par exemple, si le commentaire est identifié comme étant négatif et appartenant au cluster 0, le chatbot fournira une réponse spécifique préalablement préparée pour répondre au client de manière systématique.") 
+
     st.markdown("<a href='https://verbasatispyzer-botty.streamlit.app/'>lien</a>", unsafe_allow_html=True)
 elif page == "Conclusion et Perspectives":
     st.runtime.legacy_caching.clear_cache()
