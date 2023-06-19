@@ -1288,7 +1288,7 @@ elif page == "Chatbot":
         }
         </style>
     """, unsafe_allow_html=True)
-    st.markdown("<button class='button-64 center' role='button', onclick=\"window.location.href='https://w3docs.com';\"><span class='text'>Lien ChatBot</span></button>", unsafe_allow_html=True)
+    st.markdown("<button class='button-64 center' role='button' onclick=\"window.location.href='https://w3docs.com';\"><span class='text'>Lien ChatBot</span></button>", unsafe_allow_html=True)
 elif page == "Conclusion et Perspectives":
     st.runtime.legacy_caching.clear_cache()
     st.markdown("<h4 class='center'>Conclusion</h4>",unsafe_allow_html=True)
