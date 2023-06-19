@@ -1281,7 +1281,6 @@ elif page == "Chatbot":
         a:hover { text-decoration: none; }
         </style>
     """, unsafe_allow_html=True)
-    st.markdown("<form action='https://verbasatispyzer-botty.streamlit.app/'><button class='button-64 center' role='button'><span class='text'>Lien ChatBot</span></button></form>", unsafe_allow_html=True)
     st.markdown("<a href='https://verbasatispyzer-botty.streamlit.app/'><button class='button-64 center' role='button'><span class='text'>Lien ChatBot</span></button></a>", unsafe_allow_html=True)
 
 elif page == "Conclusion et Perspectives":
