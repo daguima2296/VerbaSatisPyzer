@@ -534,30 +534,30 @@ elif page == "Modélisation":
         st.write("La modélisation a été effectuée en utilisant la technique de recherche sur grille (grid search) pour determiner les meilleurs hyperparamètres de chaque modèle évalué. Les modèles testés comprenaient la régression logistique, le réseau de neurones, la méthode des k plus proches voisins(KNN), les machines à vecteurs de support (SVM), les forêts aléatoires (random forest) et les arbres de décision.")
         st.write("Les résultats obtenus pour chaque modèle sont les suivants:")
         # Options
-        options = ['Regression Logistique', 'Reseau de Neuronne', 'KNN', 'SVM','Foret Aléatoire',"Arbre de décision"]
+        options = ['Régression Logistique', 'Reseau de Neuronne', 'KNN', 'SVM','Foret Aléatoire',"Arbre de décision"]
         def Data(option):
-            if option =='Regression Logistique':
-                report_data = {'Precision': [0.85, 0.80], 'Recall': [0.78, 0.86], 'F1-score': [0.81, 0.83], 'Support': [5204, 5205]}
+            if option =='Régression Logistique':
+                report_data = {'Précision': [0.85, 0.80], 'Rappel': [0.78, 0.86], 'F1-score': [0.81, 0.83], 'Support': [5204, 5205]}
                 best_score = 0.8144981634516892
                 test_score = 0.8193870688826976
             if option =='Reseau de Neuronne':
-                report_data = {'Precision': [0.84, 0.83], 'Recall': [0.82, 0.84], 'F1-score': [0.83, 0.83], 'Support': [5204, 5205]}
+                report_data = {'Précision': [0.84, 0.83], 'Rappel': [0.82, 0.84], 'F1-score': [0.83, 0.83], 'Support': [5204, 5205]}
                 best_score = 0.8254989795126834
                 test_score = 0.8313959073878374
             if option =='KNN':
-                report_data = {'Precision': [0.79, 0.91], 'Recall': [0.93, 0.75], 'F1-score': [0.85, 0.82], 'Support': [5204, 5205]}
+                report_data = {'Précision': [0.79, 0.91], 'Rappel': [0.93, 0.75], 'F1-score': [0.85, 0.82], 'Support': [5204, 5205]}
                 best_score = 0.8307593261630701
                 test_score = 0.8386972811989625
             if option =='SVM':
-                report_data = {'Precision': [0.84, 0.84], 'Recall': [0.84, 0.84], 'F1-score': [0.84, 0.84], 'Support': [5204, 5205]}
+                report_data = {'Précision': [0.84, 0.84], 'Rappel': [0.84, 0.84], 'F1-score': [0.84, 0.84], 'Support': [5204, 5205]}
                 best_score = 0.8280450846222278
                 test_score = 0.8377365741185513
             if option =='Foret Aléatoire':
-                report_data = {'Precision': [0.87, 0.91], 'Recall': [0.92, 0.87], 'F1-score': [0.89, 0.89], 'Support': [5204, 5205]}
+                report_data = {'Précision': [0.87, 0.91], 'Rappel': [0.92, 0.87], 'F1-score': [0.89, 0.89], 'Support': [5204, 5205]}
                 best_score = 0.8770928081657218
                 test_score = 0.8914400999135363
             if option =="Arbre de décision":
-                report_data = {'Precision': [0.81, 0.86], 'Recall': [0.87, 0.80], 'F1-score': [0.84, 0.83], 'Support': [5204, 5205]}
+                report_data = {'Précision': [0.81, 0.86], 'Rappel': [0.87, 0.80], 'F1-score': [0.84, 0.83], 'Support': [5204, 5205]}
                 best_score = 0.8141379156061561
                 test_score = 0.8337976750888654
             classification_report = pd.DataFrame(report_data, index=[0, 1])
