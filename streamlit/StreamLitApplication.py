@@ -1253,16 +1253,10 @@ elif page == "Chatbot":
           white-space: nowrap;
           cursor: pointer;
         }
-        
-         
-        
         .button-64:active,
         .button-64:hover {
           outline: 0;
         }
-        
-         
-        
         .button-64 span {
           background-color: rgb(5, 6, 45);
           padding: 16px 24px;
@@ -1271,9 +1265,6 @@ elif page == "Chatbot":
           height: 100%;
           transition: 300ms;
         }
-        
-         
-        
         .button-64:hover span {
           background: none;
         }
@@ -1288,7 +1279,7 @@ elif page == "Chatbot":
         }
         </style>
     """, unsafe_allow_html=True)
-    st.markdown("<button class='button-64 center' role='button' onclick=\"window.location.href='https://verbasatispyzer-botty.streamlit.app/';\"><span class='text'>Lien ChatBot</span></button>", unsafe_allow_html=True)
+    st.markdown("<form action='https://verbasatispyzer-botty.streamlit.app/'><button class='button-64 center' role='button'><span class='text'>Lien ChatBot</span></button></form>", unsafe_allow_html=True)
 elif page == "Conclusion et Perspectives":
     st.runtime.legacy_caching.clear_cache()
     st.markdown("<h4 class='center'>Conclusion</h4>",unsafe_allow_html=True)
