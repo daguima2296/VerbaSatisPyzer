@@ -1234,7 +1234,7 @@ elif page == "Chatbot":
         <style>
         .button-64 {
           align-items: center;
-          background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+          background-image: linear-gradient(144deg,#FEFEFE, #E37878 50%,#F42D2D);
           border: 0;
           border-radius: 8px;
           box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
