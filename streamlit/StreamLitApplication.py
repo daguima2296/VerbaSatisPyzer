@@ -206,7 +206,7 @@ elif page == "Analyse exploratoire":
         )
         
         dfbase=df
-        diccolor={"Global":"#D82DE4", "Rakuten":"#E42D95", "Cdiscount":"#E42D3A","Wish":"#E47C2D","Amazon":"#E4D82D"}
+        diccolor={"Global":"#4C7CDB", "Rakuten":"#16A82F", "Cdiscount":"#E42D3A","Wish":"#E47C2D","Amazon":"#E4D82D"}
         colorsgraph=diccolor[datasel]
         if datasel!="Global":
             dfbase = df.loc[df.Site==datasel]
@@ -224,13 +224,13 @@ elif page == "Analyse exploratoire":
     col12,col22 = st.columns([5,3])
     TabSites=["Rakuten","Wish","Cdiscount","Amazon"]
     with col12:
-        TabColors=["#E42D95","#E47C2D","#E42D3A","#E4D82D"]
+        TabColors=["#16A82F","#E47C2D","#E42D3A","#E4D82D"]
         fig4 = go.Figure()
         fig4.add_trace(go.Box(
                 y=df.note,
                 name="Global",
                 jitter=0.3,
-                marker_color='#D82DE4',
+                marker_color='#4C7CDB',
                 line_color='#D82DE4',
                 boxmean=True
             ))
