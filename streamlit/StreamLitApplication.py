@@ -1229,6 +1229,7 @@ elif page == "Chatbot":
     st.write("Par exemple, si le commentaire est identifié comme étant négatif et appartenant au cluster 0, le chatbot fournira une réponse spécifique préalablement préparée pour répondre au client de manière systématique.") 
     st.markdown(
         """
+        <style>
         .button-35 {
           align-items: center;
           background-color: #fff;
@@ -1260,6 +1261,7 @@ elif page == "Chatbot":
         .button-35:hover {
           box-shadow: #121212 0 0 0 3px, transparent 0 0 0 0;
         }
+        </style>
     """, unsafe_allow_html=True)
     st.markdown("        <button class='button-35' role='button' href='https://verbasatispyzer-botty.streamlit.app/'>Button 35</button>", unsafe_allow_html=True)
 elif page == "Conclusion et Perspectives":
