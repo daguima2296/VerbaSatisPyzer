@@ -1277,7 +1277,8 @@ elif page == "Chatbot":
             min-width: 196px;
           }
         }
-        a, u { text-decoration: none; }
+        a { text-decoration: none; }
+        a:hover { text-decoration: none; }
         </style>
     """, unsafe_allow_html=True)
     st.markdown("<form action='https://verbasatispyzer-botty.streamlit.app/'><button class='button-64 center' role='button'><span class='text'>Lien ChatBot</span></button></form>", unsafe_allow_html=True)
