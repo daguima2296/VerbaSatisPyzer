@@ -1227,8 +1227,41 @@ elif page == "Chatbot":
     st.markdown("<h4 class='center'>Cas pratique de l’analyse des verbatims : création d’un chatbot</h4>",unsafe_allow_html=True)
     st.write("L'objectif principal du chatbot est d'utiliser les résultats du modèle de bagging pour analyser la réponse du client, classifier son commentaire comme étant positif ou négatif, et identifier le cluster auquel il appartient.")
     st.write("Par exemple, si le commentaire est identifié comme étant négatif et appartenant au cluster 0, le chatbot fournira une réponse spécifique préalablement préparée pour répondre au client de manière systématique.") 
-
-    st.markdown("<a href='https://verbasatispyzer-botty.streamlit.app/'>lien</a>", unsafe_allow_html=True)
+    st.markdown(
+        """
+        .button-35 {
+          align-items: center;
+          background-color: #fff;
+          border-radius: 12px;
+          box-shadow: transparent 0 0 0 3px,rgba(18, 18, 18, .1) 0 6px 20px;
+          box-sizing: border-box;
+          color: #121212;
+          cursor: pointer;
+          display: inline-flex;
+          flex: 1 1 auto;
+          font-family: Inter,sans-serif;
+          font-size: 1.2rem;
+          font-weight: 700;
+          justify-content: center;
+          line-height: 1;
+          margin: 0;
+          outline: none;
+          padding: 1rem 1.2rem;
+          text-align: center;
+          text-decoration: none;
+          transition: box-shadow .2s,-webkit-box-shadow .2s;
+          white-space: nowrap;
+          border: 0;
+          user-select: none;
+          -webkit-user-select: none;
+          touch-action: manipulation;
+        }
+        
+        .button-35:hover {
+          box-shadow: #121212 0 0 0 3px, transparent 0 0 0 0;
+        }
+    """, unsafe_allow_html=True)
+    st.markdown("        <button class='button-35' role='button' href='https://verbasatispyzer-botty.streamlit.app/'>Button 35</button>", unsafe_allow_html=True)
 elif page == "Conclusion et Perspectives":
     st.runtime.legacy_caching.clear_cache()
     st.markdown("<h4 class='center'>Conclusion</h4>",unsafe_allow_html=True)
