@@ -18,7 +18,7 @@ import emoji
 import re
 from sklearn.cluster import KMeans
 st.set_page_config(
-    page_title='Supply Chain - Satisfaction des clients',
+    page_title='VerbaSatisPyzer',
     page_icon='analysis.png',
     layout='wide')
 st.markdown(
