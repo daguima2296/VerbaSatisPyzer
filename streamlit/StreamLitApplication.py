@@ -1188,9 +1188,7 @@ style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: a
 
         
 
-        st.markdown("<div class='center'>",unsafe_allow_html=True)
-        plot_model_architecture()
-        st.markdown("</div>",unsafe_allow_html=True)
+        st.markdown("<div class='center'>"+plot_model_architecture()+"</div>",unsafe_allow_html=True)
 
         st.write("La matrice de confusion obtenue ainsi que le rapport de classification confirment la capacité du modèle à effectuer une classification précise des classes. ")
         col1disBIS,col2disBIS=st.columns(2)
