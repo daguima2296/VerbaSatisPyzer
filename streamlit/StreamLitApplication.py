@@ -329,7 +329,7 @@ elif page == "Analyse exploratoire":
         # Créer un diagramme à barres à partir des données du nouveau DataFrame
         fig3 = go.Figure(data=[go.Bar(x=count_by_length.index, y=count_by_length, marker_color="#F2BB00", text=count_by_length.round(2).astype(str), textposition='outside', textfont=dict(size=14))])
         # Définir le titre et les étiquettes des axes
-        fig3.update_layout(title='Répartitions des commentaires par nombre de mots', xaxis_title='Nombre de mots',
+        fig3.update_layout(title='Nombre de mots dans le commentaire', xaxis_title='Nombre de mots',
                            yaxis_title='Nombre de commentaires',yaxis_range=[0, max(count_by_length)+1000])
         st.plotly_chart(fig3, use_container_width=True)
     with col25:
@@ -339,8 +339,8 @@ elif page == "Analyse exploratoire":
         fig = go.Figure()
         fig = go.Figure(data=go.Bar(name="Commentaire",x=stars_by_comm_length.index, y=stars_by_comm_length, marker_color="#FD2F22"))
 
-        fig.update_layout(title="Note moyenne par jour de la semaine", xaxis_title='Jour de la semaine',
-                           yaxis_title="Moyenne des notes",yaxis_range=[0, 5.5])
+        fig.update_layout(title="Note moyenne par nombre de mots dans le commentaire", xaxis_title='Nombre de mots',
+                           yaxis_title="Note moyenne",yaxis_range=[0, 5.5])
         st.plotly_chart(fig, use_container_width=True)
     st.write("L'analyse du nombre de signes de ponctuation dans les commentaires peut fournir des informations intéressantes sur le degré de satisfaction des utilisateurs. Il est remarquable qu'un nombre très limité d'utilisateurs utilise des signes de ponctuation. Cependant, la note moyenne en fonction du nombre de signes de ponctuation révèle une tendance selon laquelle plus un utilisateur utilise de signes de ponctuation, moins il semble être satisfait.")
     st.write("Il convient d'être attentif à ces deux variables, à savoir le nombre de points d'exclamation et d'interrogation, ainsi que le nombre de signes de ponctuation standard, lors de la modélisation, car elles peuvent être corrélées avec le nombre de mots présents dans le commentaire.")
