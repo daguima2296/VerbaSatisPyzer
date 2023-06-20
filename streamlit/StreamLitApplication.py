@@ -294,12 +294,12 @@ elif page == "Analyse exploratoire":
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=stars_by_year_comm.index, y=stars_by_year_comm,
                             mode='lines',
-                            name='Commentaires',marker_color="#44D4A8"))
+                            name='Année du commentaire',marker_color="#44D4A8"))
         fig.add_trace(go.Scatter(x=stars_by_year_exp.index, y=stars_by_year_exp,
                             mode='lines',
-                            name="Experience",marker_color="#D44470"))
-        fig.update_layout(title="Evolution des notes moyennes", xaxis_title='Annee',
-                           yaxis_title="Moyenne des notes",yaxis_range=[0, 5.5])
+                            name="Année de l'expérience",marker_color="#D44470"))
+        fig.update_layout(title="Note moyenne par année", xaxis_title='Année',
+                           yaxis_title="Note moyenne",yaxis_range=[0, 5.5])
         st.plotly_chart(fig, use_container_width=True)
     st.write("Les utilisateurs ont tendance à laisser davantage de commentaires en début de semaine et légèrement moins les week-ends, bien que la répartition des jours de la semaine auxquels les avis sont publiés soit très homogène.")
     st.write("Cependant, il est intéressant de noter que les utilisateurs qui postent leurs avis vers la fin de la semaine semblent être plus satisfaits que ceux qui les postent en début de semaine.")
