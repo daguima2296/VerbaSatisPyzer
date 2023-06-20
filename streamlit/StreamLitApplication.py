@@ -40,6 +40,10 @@ st.markdown(
             text-align: justify;
             justify-content: center;
         }
+        .fullScreenFrame > div {
+            display: flex;
+            justify-content: center;
+        }
     </style>
 """, unsafe_allow_html=True)
 st.markdown('<h2 class="center">VerbaSatisPyzer</h2>',
@@ -1188,16 +1192,10 @@ style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: a
             st.plotly_chart(fig)
 
         
-        col1, col2, col3 = st.beta_columns([1,6,1])
+  
 
-        with col1:
-            st.write("")
-        
-        with col2:
-            plot_model_architecture()
-        
-        with col3:
-            st.write("")
+        plot_model_architecture()
+
         
 
         st.write("La matrice de confusion obtenue ainsi que le rapport de classification confirment la capacité du modèle à effectuer une classification précise des classes. ")
