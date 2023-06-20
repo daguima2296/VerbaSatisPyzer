@@ -38,6 +38,7 @@ st.markdown(
             margin-right: 7.4%;
             padding:5%;
             text-align: justify;
+            justify-content: center;
         }
     </style>
 """, unsafe_allow_html=True)
