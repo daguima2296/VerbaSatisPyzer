@@ -539,8 +539,8 @@ elif page == "Modélisation":
         fig1 = go.Figure(data=[go.Bar(x=type_counts.index, y=type_counts['type'], marker_color="#6d9e32",
                          text=type_counts['type'].round(2).astype(str) + '%', textposition='outside', textfont=dict(size=14))])
         # Définir le titre et les étiquettes des axes
-        fig1.update_layout(title='Nombre d\'occurrences de chaque type ', xaxis_title='Type',
-                           yaxis_title='Pourcentage d\'occurrences',yaxis_range=[0, max(type_counts['type']) + 5])
+        fig1.update_layout(title='Répartition des avis positifs et négatifs', xaxis_title='Client insatisfait (0) / client satisfait (1)',
+                           yaxis_title='Pourcentage',yaxis_range=[0, max(type_counts['type']) + 5])
         st.plotly_chart(fig1, use_container_width=True)
 
         st.write("La modélisation a été effectuée en utilisant la technique de recherche sur grille (grid search) pour determiner les meilleurs hyperparamètres de chaque modèle évalué. Les modèles testés comprenaient la régression logistique, le réseau de neurones, la méthode des k plus proches voisins(KNN), les machines à vecteurs de support (SVM), les forêts aléatoires (random forest) et les arbres de décision.")
