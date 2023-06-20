@@ -389,8 +389,8 @@ elif page == "Analyse exploratoire":
               [0.9, '#3D43CB '],[1.0, '#2839D0']]
     # Créer une figure plotly avec une carte de chaleur
     fig1 = go.Figure(data=go.Heatmap(z=cor, colorscale=colors,
-                    hoverongaps=False,x=["Notes","Année commentaire","# signe expressif","# signe standard","Contient une ellipse","# mots","# mots majuscule"],
-                                     y=["Notes","Année commentaire","# signe expressif","# signe standard","Contient une ellipse","# mots","# mots majuscule"]))
+                    hoverongaps=False,x=["Note","Année du commentaire","Nb signes expressifs","Nb signes standard","Points suspension","Nb mots","Nb mots majuscule"],
+                                     y=["Note","Année du commentaire","Nb signes expressifs","Nb signes standard","Points suspension","Nb mots","Nb mots majuscule"]))
     for i in range(len(cor)):
         for j in range(len(cor.columns)):
             fig1.add_annotation(x=j, y=i, text=str(np.round(cor.values[i, j], 2)),
