@@ -376,8 +376,8 @@ elif page == "Analyse exploratoire":
     ordre=["0","1","2","3","4","5",">5"]
     stars_by_up=dfData.groupby('nb_mots_maj_comm2')['note'].mean().reindex(ordre)
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=ordre, y=stars_by_up, mode='lines',name="Nombre de mots majuscule",marker_color="#7E18A2"))
-    fig.update_layout(title="Moyennes des notes par nombre de mots en majuscule", xaxis_title='Nombre de mots en majuscule', yaxis_title="Moyenne des notes")
+    fig.add_trace(go.Scatter(x=ordre, y=stars_by_up, mode='lines',name="Nombre de mots en majuscule",marker_color="#7E18A2"))
+    fig.update_layout(title="Note moyenne par nombre de mots en majuscule", xaxis_title='Nombre de mots en majuscule', yaxis_title="Note moyenne")
     st.plotly_chart(fig, use_container_width=True)
     st.write("La matrice de corrélation révèle une faible corrélation entre les variables explicatives, réduisant ainsi le risque de multicollinéarité. De même, les variables explicatives présentent une faible corrélation avec la note attribuée par l'utilisateur, ce qui suggère qu'elles ne seront probablement pas suffisantes pour expliquer la note. Par conséquent, il est nécessaire d'ajouter d'autres variables au modèle.")
     st.write("Il est important de noter que la variable 'nombre de signes de ponctuation standard' présente une forte corrélation avec le nombre de mots du commentaire, tandis que sa corrélation avec la variable cible est plus faible. Pour cette raison, cette variable sera exclue du modèle. ")
