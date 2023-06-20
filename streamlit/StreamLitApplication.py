@@ -611,6 +611,45 @@ elif page == "Modélisation":
         st.markdown("<h5>Deuxieme approche : basée uniquement sur l'analyse des avis </h5>",unsafe_allow_html=True)
         st.write("Afin de permettre aux algorithmes de machine learning et de deep learning d'interpréter les commentaires, il est essentiel de les convertir en vecteurs numériques représentant les informations textuelles. Deux techniques de vectorisation de texte sont couramment utilisées dans l'analyse de commentaires : le TF-IDF(Term Frequency-Inverse Document Frequency) et le Count Vectorizer.")
         st.write("Le TF-IDF tient compte de la fréquence et de l'importance des mots dans un document et dans le corpus, tandis que le Count Vectorizer se contente de compter le nombre d'occurences des mots dans chaque document.")
+        from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+
+        # Titre de l'application
+        st.title("Comparaison entre TF-IDF et CountVectorizer")
+        
+        # Texte d'exemple
+        texte = """
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Praesent eget consectetur nisi. Curabitur sed suscipit est.
+        """
+        
+        # Sélection du vecteurizer
+        vecteurizer_choice = st.selectbox("Choisissez un vecteurizer", ("CountVectorizer", "TF-IDF"))
+        
+        # Paramètres des vecteurizers
+        min_df = st.slider("Min_df (nombre minimal d'occurrences d'un mot)", 1, 10, 1)
+        max_features = st.slider("Max_features (nombre maximal de mots)", 100, 1000, 500)
+        
+        # Création du vecteurizer sélectionné
+        if vecteurizer_choice == "CountVectorizer":
+            vecteurizer = CountVectorizer(min_df=min_df, max_features=max_features)
+        else:
+            vecteurizer = TfidfVectorizer(min_df=min_df, max_features=max_features)
+        
+        # Transformation du texte en vecteurs
+        vecteurs = vecteurizer.fit_transform([texte])
+        
+        # Affichage des résultats
+        st.subheader("Résultats :")
+        st.write("Texte d'origine :")
+        st.write(texte)
+        st.write("Vocabulaire :", vecteurizer.get_feature_names_out())
+        st.write("Matrice de vecteurs :")
+        st.write(vecteurs.toarray())
+        
+        
+        
+        
+        
         st.write("Les performances des différents modèles sont récapitulées dans le tableau ci-dessous:")
         report_data = {'Modèle':["Multinomial NB","Multinomial NB","Forêt aléatoire","Forêt aléatoire","K-means","K-means","Régression logistique","Régression logistique","XGBOOST","XGBOOST"],
                        'Type de vectorisation':["TF-IDF","Count Vectorizer","TF-IDF","Count Vectorizer","TF-IDF","Count Vectorizer","TF-IDF","Count Vectorizer","TF-IDF","Count Vectorizer"],
