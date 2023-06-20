@@ -245,7 +245,7 @@ elif page == "Analyse exploratoire":
                 line_color=TabColors[j],
                 boxmean=True
             ))
-        fig4.update_layout(title='Diagrammes en boîte sur la répartition des notes', xaxis_title='Site',
+        fig4.update_layout(title='Diagrammes en boîte sur la répartition des notes', xaxis_title='Site e-commerce',
                            yaxis_title='Notes')
         st.plotly_chart(fig4, use_container_width=True)
     with col22:
