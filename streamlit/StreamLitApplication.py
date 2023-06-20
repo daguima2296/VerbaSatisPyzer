@@ -265,7 +265,7 @@ elif page == "Analyse exploratoire":
     st.write("La satisfaction des clients semble avoir connu une progression au fil du temps, atteignant un pic avant de diminuer légèrement à partir de 2022. Cependant, il convient de prendre cette conclusion avec prudence, car la répartition des avis n'est pas uniforme pour toutes les années de l'étude. ")
     dfData = pd.read_csv(r"Data.csv")
     datasel=st.selectbox(
-            "Selection des données",
+            "Veuillez séléctionner un site e-commerce",
             key="DonnéesBis",
             options=["Global", "Rakuten", "Cdiscount","Wish","Amazon"]
         )
