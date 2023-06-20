@@ -616,40 +616,41 @@ elif page == "Modélisation":
         
         # Titre de l'application
         st.write("Comparaison entre TF-IDF et CountVectorizer")
-        
-        # Texte d'exemple
         texte = """
         Au voleur ! au voleur ! à l'assassin ! au meurtrier ! Justice, juste Ciel ! je suis perdu, je suis assassiné, on m'a coupé la gorge, on m'a dérobé mon argent. Qui peut-ce être ? Qu'est-il devenu ? Où est-il ? Où se cache-t-il ? Que ferai-je pour le trouver? Où courir? Où ne pas courir? N'est-il point là ? N'est-il point ici ? Qui est-ce ? Arrête. Rends-moi mon argent, coquin. 
         """
-        
-        # Sélection du vecteurizer
         vecteurizer_choice = st.selectbox("Choisissez un vecteurizer", ("CountVectorizer", "TF-IDF"))
-        
-        # Paramètres des vecteurizers
-        min_df = st.slider("Min_df (nombre minimal d'occurrences d'un mot)", 1, 5, 1)
+        min_df = 1
         max_features = st.slider("Max_features (nombre maximal de mots)", 10, 200, 5)
-        
-        # Création du vecteurizer sélectionné
         if vecteurizer_choice == "CountVectorizer":
             vecteurizer = CountVectorizer(min_df=min_df, max_features=max_features)
         else:
             vecteurizer = TfidfVectorizer(min_df=min_df, max_features=max_features)
-        
-        # Transformation du texte en vecteurs
         vecteurs = vecteurizer.fit_transform([texte])
-        
-        # Affichage des résultats
-        st.subheader("Résultats :")
         st.write("Texte d'origine :")
         st.write(texte)
-        st.write("Vocabulaire :", vecteurizer.get_feature_names_out())
-        st.write("Matrice de vecteurs :")
-        st.write(vecteurs.toarray())
+        colvoc,colvec=st.columns([1,3])
+        with colvoc:
+            st.write("Vocabulaire :", vecteurizer.get_feature_names_out())
+        with colvec:
+            st.write("Matrice de vecteurs :")
+            st.write(vecteurs.toarray())
+            if vecteurizer_choice != "CountVectorizer":
+                # Explication de TF-IDF
+                st.subheader("TF-IDF (Term Frequency-Inverse Document Frequency)")
+                
+                st.latex(r'''TF-IDF(t, d, D) = TF(t, d) \times IDF(t, D)''')
+                st.write("avec")
+                st.markdown("**TF (Term Frequency)** mesure le nombre de fois qu'un terme `t` apparaît dans un document `d`. ")
+                st.latex(r'''TF(t, d) = \frac{{\text{{nombre d'occurrences de }} t \text{{ dans }} d}}{{\text{{nombre total de termes dans }} d}}''')
+                st.write('et')
+                st.markdown("**IDF (Inverse Document Frequency)** mesure l'importance d'un terme `t` dans une collection de documents `D`. ")
+                st.latex(r'''IDF(t, D) = \log\left(\frac{{\text{{nombre total de documents dans }} D}}{{\text{{nombre de documents contenant }} t}}\right)''')
         
         
         
-        
-        
+        st.write(" ")
+        st.write(" ")
         st.write("Les performances des différents modèles sont récapitulées dans le tableau ci-dessous:")
         report_data = {'Modèle':["Multinomial NB","Multinomial NB","Forêt aléatoire","Forêt aléatoire","K-means","K-means","Régression logistique","Régression logistique","XGBOOST","XGBOOST"],
                        'Type de vectorisation':["TF-IDF","Count Vectorizer","TF-IDF","Count Vectorizer","TF-IDF","Count Vectorizer","TF-IDF","Count Vectorizer","TF-IDF","Count Vectorizer"],
