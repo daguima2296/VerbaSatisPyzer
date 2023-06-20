@@ -440,11 +440,11 @@ elif page == "Analyse exploratoire":
         return plt.gcf()
     col18, col28 = st.columns(2)
     with col18:
-        st.markdown("<h5>Nuage de Mots pour les commentaires positifs</h5>",unsafe_allow_html=True)
+        st.markdown("<h5>Avis positifs</h5>",unsafe_allow_html=True)
         fig = generate_wordcloud(df_good,False)
         st.pyplot(fig)
     with col28:
-        st.markdown("<h5>Nuage de Mots pour les commentaires negatifs</h5>",unsafe_allow_html=True)
+        st.markdown("<h5>Avis négatifs</h5>",unsafe_allow_html=True)
         fig = generate_wordcloud(df_bad,True)
         st.pyplot(fig)
     st.write("Pour améliorer le modèle, il est encore plus intéressant d'observer les bigrammes les plus fréquents dans les avis, car ils permettent de capturer les associations de mots consécutifs.")
