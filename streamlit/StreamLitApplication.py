@@ -22,7 +22,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 st.set_page_config(
     page_title='VerbaSatisPyzer',
     page_icon='analysis.png',
-    layout='centered')
+    layout='wide')
 st.markdown(
     """
     <style>
