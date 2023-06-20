@@ -22,7 +22,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 st.set_page_config(
     page_title='VerbaSatisPyzer',
     page_icon='analysis.png',
-    layout='wide')
+    layout='centered')
 st.markdown(
     """
     <style>
@@ -1188,7 +1188,7 @@ style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: a
 
         
 
-        st.markdown("<div class='center'>"+plot_model_architecture()+"</div>",unsafe_allow_html=True)
+        plot_model_architecture()
 
         st.write("La matrice de confusion obtenue ainsi que le rapport de classification confirment la capacité du modèle à effectuer une classification précise des classes. ")
         col1disBIS,col2disBIS=st.columns(2)
