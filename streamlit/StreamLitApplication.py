@@ -548,13 +548,13 @@ elif page == "Modélisation":
         st.write("La modélisation a été effectuée en utilisant la technique de recherche sur grille (grid search) pour determiner les meilleurs hyperparamètres de chaque modèle évalué. Les modèles testés comprenaient la régression logistique, le réseau de neurones, la méthode des k plus proches voisins(KNN), les machines à vecteurs de support (SVM), les forêts aléatoires (random forest) et les arbres de décision.")
         st.write("Les résultats obtenus pour chaque modèle sont les suivants:")
         # Options
-        options = ['Régression Logistique', 'Reseau de Neuronne', 'KNN', 'SVM','Foret Aléatoire',"Arbre de décision"]
+        options = ['Régression logistique', 'Réseau de neuronnes', 'KNN', 'SVM','Forêt aléatoire',"Arbre de décisions"]
         def Data(option):
-            if option =='Régression Logistique':
+            if option =='Régression logistique':
                 report_data = {'Précision': [0.85, 0.80], 'Rappel': [0.78, 0.86], 'F1-score': [0.81, 0.83], 'Support': [5204, 5205]}
                 best_score = 0.8144981634516892
                 test_score = 0.8193870688826976
-            if option =='Reseau de Neuronne':
+            if option =='Réseau de neuronnes':
                 report_data = {'Précision': [0.84, 0.83], 'Rappel': [0.82, 0.84], 'F1-score': [0.83, 0.83], 'Support': [5204, 5205]}
                 best_score = 0.8254989795126834
                 test_score = 0.8313959073878374
@@ -566,21 +566,21 @@ elif page == "Modélisation":
                 report_data = {'Précision': [0.84, 0.84], 'Rappel': [0.84, 0.84], 'F1-score': [0.84, 0.84], 'Support': [5204, 5205]}
                 best_score = 0.8280450846222278
                 test_score = 0.8377365741185513
-            if option =='Foret Aléatoire':
+            if option =='Forêt aléatoire':
                 report_data = {'Précision': [0.87, 0.91], 'Rappel': [0.92, 0.87], 'F1-score': [0.89, 0.89], 'Support': [5204, 5205]}
                 best_score = 0.8770928081657218
                 test_score = 0.8914400999135363
-            if option =="Arbre de décision":
+            if option =="Arbre de décisions":
                 report_data = {'Précision': [0.81, 0.86], 'Rappel': [0.87, 0.80], 'F1-score': [0.84, 0.83], 'Support': [5204, 5205]}
                 best_score = 0.8141379156061561
                 test_score = 0.8337976750888654
             classification_report = pd.DataFrame(report_data, index=[0, 1])
             st.write("Best Score:", best_score)
             st.write("Test Score:", test_score)
-            st.write("Classification Report:")
+            st.write("Rapport de classification:")
             st.table(classification_report)
         # Sélection des options
-        selected_options = st.multiselect("Sélectionnez l'option (les options)", options,['Régression Logistique'])
+        selected_options = st.multiselect("Sélectionnez l'option (les options)", options,['Régression logistique'])
 
         # Affichage du texte en fonction des options sélectionnées
         num_options = len(selected_options)
