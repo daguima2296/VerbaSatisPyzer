@@ -457,7 +457,7 @@ elif page == "Analyse exploratoire":
         fig3 = go.Figure(data=go.Bar(name="Good bigrammes",x=x_value, y=y_index, marker_color="#54AC52",orientation='h'))
         # Définir le titre et les étiquettes des axes
         fig3.update_layout(title='Clients satisfaits', xaxis_title='Fréquence',
-                           yaxis_title='Bigrams')
+                           yaxis_title='Bigrammes')
         st.plotly_chart(fig3, use_container_width=True)
     with col29:
         x_value=[3393,384, 383,365,363, 357, 317,312,302,273]
@@ -465,7 +465,7 @@ elif page == "Analyse exploratoire":
         fig3 = go.Figure(data=go.Bar(name="Bad bigrammes",x=x_value, y=y_index, marker_color="#E61B1B",orientation='h'))
         # Définir le titre et les étiquettes des axes
         fig3.update_layout(title='Clients insatisfaits', xaxis_title='Fréquence',
-                           yaxis_title='Bigrams')
+                           yaxis_title='Bigrammes')
         st.plotly_chart(fig3, use_container_width=True)
     df = pd.read_csv("NER_POS.csv")
     fig = go.Figure()
@@ -477,8 +477,8 @@ elif page == "Analyse exploratoire":
                             mode='lines',
                             name=i))
 
-        fig.update_layout(title="Moyennes des notes par pour centage de présence des éléments", xaxis_title='pourcentage',
-                       yaxis_title="Moyenne des notes")
+        fig.update_layout(title="Note moyenne par entité nommée/étiquette gramaticale", xaxis_title='Pourcentage d'entité nommée/étiquette gramaticale',
+                       yaxis_title="Note moyenne")
         st.plotly_chart(fig, use_container_width=True)
     st.markdown("<h3 class='center'>Résumé et interpretation</h3>",unsafe_allow_html=True)
     st.write("L'analyse exploratoire nous a permis de mieux comprendre les données et d'identifier les variables pouvant expliquer les facteurs déterminant la satisfaction des clients.")
