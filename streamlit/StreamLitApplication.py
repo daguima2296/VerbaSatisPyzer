@@ -353,7 +353,7 @@ elif page == "Analyse exploratoire":
         fig3 = go.Figure(data=[go.Bar(name="! ?",x=count_ponc.index, y=count_ponc, marker_color="#EA3D03"),
                               go.Bar(name=", ; :",x=count_excla.index, y=count_excla, marker_color="#23AB32")])
         # Définir le titre et les étiquettes des axes
-        fig3.update_layout(title='Répartitions des commentaires par nombre de signes de ponctuations', xaxis_title='Nombre de signe',
+        fig3.update_layout(title='Nombre de signes de ponctuation dans les commentaires', xaxis_title='Nombre de signes de ponctuation',
                            yaxis_title='Nombre de commentaires')
         st.plotly_chart(fig3, use_container_width=True)
     with col26:
@@ -369,8 +369,8 @@ elif page == "Analyse exploratoire":
                             mode='lines',
                             name=", ; :", marker_color="#23AB32"))
 
-        fig.update_layout(title="Moyennes des notes par nombre de signes", xaxis_title='Nombre de signe',
-                           yaxis_title="Moyenne des notes")
+        fig.update_layout(title="Note moyenne par nombre de signes de ponctuation", xaxis_title='Nombre de signes de ponctuation',
+                           yaxis_title="Note moyenne")
         st.plotly_chart(fig, use_container_width=True)
     st.write("L'utilisation de mots en majuscules peut intensifier l'aspect émotionnel d'un avis, ce qui peut influencer la note attribuée en amplifiant le sentiment positif ou négatif exprimé. Les données collectées suggèrent une corrélation entre l'utilisation de mots en majuscules et le degré d'insatisfaction de l'utilisateur. Cela peut être une variable intéressante à prendre en compte lors de la modélisation. ")
     ordre=["0","1","2","3","4","5",">5"]
