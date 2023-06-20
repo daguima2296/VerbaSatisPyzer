@@ -150,7 +150,7 @@ elif page == "Données":
     st.write("Avant de procéder à l'analyse exploratoire et à la modélisation, il est essentiel de nettoyer la base de données. Pour ce faire, plusieurs étapes ont été entreprises, notamment la détection de la langue de chaque avis pour éliminer les avis qui ne sont pas en français, la transformation des dates pour uniformiser les modalités, même celles qui ne contiennent pas de dates (par exemple 'Actualisé il y a 21 heures') et la suppression des lignes générées par des bots qui contiennent généralement des codes de réduction sur le site. ")
     df=pd.read_csv("Ouais.csv")
     st.dataframe(df.sample(100))
-    st.write("La base de données nettoyée contient désormais, 41482 lignes et 8 colonnes. ")
+    st.write("La base de données nettoyée contient désormais 41482 lignes et 8 colonnes. ")
     st.markdown("<h3 class='center'>Ajout de nouvelles variables </h3>",unsafe_allow_html=True)
     st.write("Dans le cadre de l'analyse des verbatims pour mesurer la satisfaction client, il est essentiel d'ajouter de nouvelles variables pour enrichir la base de données et améliorer la précision des résultats obtenus. Ces variables supplémentaires fournissent des informations contextuelles et des nuances qui permettent une analyse plus approfondie et précise des commentaires des clients. ")
     df=pd.read_csv("Train.csv")
