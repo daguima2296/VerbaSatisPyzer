@@ -38,17 +38,12 @@ st.markdown(
             margin-right: 7.4%;
             padding:5%;
             text-align: justify;
-            justify-content: center;
-        }
-        .fullScreenFrame > div {
-            display: flex;
-            justify-content: center;
         }
     </style>
 """, unsafe_allow_html=True)
 st.markdown('<h2 class="center">VerbaSatisPyzer</h2>',
             unsafe_allow_html=True)
-st.markdown('<h4 class="center">Supply Chain - Satisfaction des clients</h4>',
+st.markdown('<h4 class="center">Analyse des verbatims pour la satisfaction client</h4>',
             unsafe_allow_html=True)
 page = "Accueil"
 page = option_menu(None, ["Accueil","Données","Analyse exploratoire", "Modélisation", "Chatbot","Conclusion et Perspectives"],
@@ -92,7 +87,7 @@ footer_html = """
     <p>
     VerbaSatisPyzer
     <span class="separator">&#8226;</span>
-    Analyse des Verbatims pour la Satisfaction Client
+    Analyse des verbatims pour la satisfaction client
     <span class="separator">&#8226;</span>
     <a href="https://www.linkedin.com/in/daguima/">Daniela Guisao Marin</a>
     <span class="separator">&#8226;</span>
@@ -152,15 +147,45 @@ elif page == "Données":
     
     st.write("La base de données ainsi obtenue est composée de 41 536 entrées et contient des variables explicatives telles que le nom de l'utilisateur, le pays où l'avis a été publié, la date de publication de l'avis, la note attribuée, le titre de l'avis, le contenu de l'avis et la date de l'expérience de l'utilisateur.")
     df=pd.read_csv("Base.csv")
+    df = pd.read_csv("Base.csv")
+
+    # Renommer les colonnes
+    df = df.rename(columns={"customer_name": "Nom de l'utilisateur",
+                            "pays": "Pays",
+                            "date_commentaire":"Date de publication avis",
+                            "note":"Note attribuée",
+                            "titre_commentaire":"Titre de l'avis",
+                            "commentaire":"Verbatim",
+                            "date_experience":"Date de l'experience",
+                            "Site":"Site e-commerce",
+                            })
     st.dataframe(df.sample(100))
     st.markdown("<h3 class='center'>Nettoyage des données </h3>",unsafe_allow_html=True)
     st.write("Avant de procéder à l'analyse exploratoire et à la modélisation, il est essentiel de nettoyer la base de données. Pour ce faire, plusieurs étapes ont été entreprises, notamment la détection de la langue de chaque avis pour éliminer les avis qui ne sont pas en français, la transformation des dates pour uniformiser les modalités, même celles qui ne contiennent pas de dates (par exemple 'Actualisé il y a 21 heures') et la suppression des lignes générées par des bots qui contiennent généralement des codes de réduction sur le site. ")
     df=pd.read_csv("Ouais.csv")
+    df = df.rename(columns={"customer_name": "Nom de l'utilisateur",
+                            "pays": "Pays",
+                            "date_commentaire":"Date de publication avis",
+                            "note":"Note attribuée",
+                            "titre_commentaire":"Titre de l'avis",
+                            "commentaire":"Verbatim",
+                            "date_experience":"Date de l'experience",
+                            "Site":"Site e-commerce",
+                            })
     st.dataframe(df.sample(100))
     st.write("La base de données nettoyée contient désormais 41482 lignes et 8 colonnes. ")
     st.markdown("<h3 class='center'>Ajout de nouvelles variables </h3>",unsafe_allow_html=True)
     st.write("Dans le cadre de l'analyse des verbatims pour mesurer la satisfaction client, il est essentiel d'ajouter de nouvelles variables pour enrichir la base de données et améliorer la précision des résultats obtenus. Ces variables supplémentaires fournissent des informations contextuelles et des nuances qui permettent une analyse plus approfondie et précise des commentaires des clients. ")
     df=pd.read_csv("Train.csv")
+    df = df.rename(columns={"note": "Note attribuée",
+                            "commentaire":"Verbatim",
+                            "type":"Type avis",
+                            "nb_mots_comm":"Nb mots verbatim",
+                            "expression_count_comm":"Nb signes expression",
+                            "annee_comm":"Année de publication",
+                            "contains_ellipsis_comm":"Points suspension",
+                            "commentaireAmeliore":"Verbatim corrigé"
+                            })
     st.dataframe(df.sample(100))
     st.write("Les variables collectées lors de l'étape précédente ont été utilisées pour créer les variables suivantes : ")
     st.markdown("""
@@ -620,7 +645,7 @@ elif page == "Modélisation":
         st.write("Le TF-IDF tient compte de la fréquence et de l'importance des mots dans un document et dans le corpus, tandis que le Count Vectorizer se contente de compter le nombre d'occurences des mots dans chaque document.")
         
         # Titre de l'application
-        st.write("Exemple d'utilisation du TF-IDF et du Count Vectorizer")
+        st.write("Calcul du TF-IDF et du Count Vectorizer")
         texte = """
         Au voleur ! au voleur ! à l'assassin ! au meurtrier ! Justice, juste Ciel ! je suis perdu, je suis assassiné, on m'a coupé la gorge, on m'a dérobé mon argent. Qui peut-ce être ? Qu'est-il devenu ? Où est-il ? Où se cache-t-il ? Que ferai-je pour le trouver? Où courir? Où ne pas courir? N'est-il point là ? N'est-il point ici ? Qui est-ce ? Arrête. Rends-moi mon argent, coquin. 
         """
@@ -661,17 +686,17 @@ elif page == "Modélisation":
                        'Type de vectorisation':["TF-IDF","Count Vectorizer","TF-IDF","Count Vectorizer","TF-IDF","Count Vectorizer","TF-IDF","Count Vectorizer","TF-IDF","Count Vectorizer"],
                        'Précision sur validation':["90.7%","90.3%","88.9%","89.2%","55.1%","70.2%","91.4%","90.9%","89.9%","90.6%"]}
         st.table(report_data)
-        st.write("Le graphique ci-dessous permet de comparre visuellement les performances des différents modèles et d'identifier les modèles ayant les précisions les plus élevées. Chaque boîte représente la dispersion des précisions des différents plis de la validation croisée pour un modèle spécifique. Les lignes à l'intèrieur de chaque boîte représentent la médiane et les moustaches indiquent la plage des précisions.")
+        st.write("Le graphique ci-dessous permet de comparer visuellement les performances des différents modèles et d'identifier les modèles ayant les précisions les plus élevées. Chaque boîte représente la dispersion des précisions des différents plis de la validation croisée pour un modèle spécifique. Les lignes à l'intèrieur de chaque boîte représentent la médiane et les moustaches indiquent la plage des précisions.")
         TabColors=["#E42D95","#E47C2D","#E42D3A","#E4D82D"]
         res = [[0.89679072, 0.90191352, 0.89528401, 0.90387223, 0.90206419],
                [0.88744915, 0.89181859, 0.89001055, 0.89001055, 0.8958867],
                [0.90598162, 0.91230978, 0.90959771, 0.91246045, 0.9117071],
                [0.9014615, 0.90628296, 0.90221486, 0.90311888, 0.90537894]]
-        name=["Multinomial NB","Forêt Aléatoire","Regression Logistique","XGBOOST"]
+        name=["Multinomial NB","Forêt aléatoire","Régression logistique","XGBOOST"]
         traces = []
         for i, data in enumerate(res):
             traces.append(go.Box(y=data,name=name[i],jitter=0.3,boxmean=True))
-        layout = go.Layout(title="Boites à Moustache",yaxis=dict(title="Precision"))
+        layout = go.Layout(title="Boîte à moustaches",yaxis=dict(title="Précision"))
         fig = go.Figure(data=traces, layout=layout)
         colbox1,colbox2,colbox3=st.columns(3)
         with colbox1:
@@ -680,10 +705,10 @@ elif page == "Modélisation":
             st.plotly_chart(fig)
         with colbox3:
             st.write(" ")
-        st.write("En analysant le tableau récapitulatif et le graphique de boîtes, il est evident que le modèle de régression logistique avec le type de vectorisation TF-IDF affiche les performances les plus élevvées. Ces résultats concluants mettent en évidence la partinence de ce modèle pour notre analyse.")
+        st.write("En analysant le tableau récapitulatif et le graphique de boîtes, il est evident que le modèle de régression logistique avec le type de vectorisation TF-IDF affiche les performances les plus élevées. Ces résultats concluants mettent en évidence la partinence de ce modèle pour notre analyse.")
         st.markdown("<h5>Analyse des résultats de la régression logistique</h5>",unsafe_allow_html=True)
-        st.write("En analysant la matrice de confusion, nous pouvons constater que le nombre de faux positifs(échantillons prédits à tort comme \"satisfait\" alors qu'ils sont réellement \"insatisfait\") et de faux négatifs (échantillons prédits à tort comme \"insatisfait\" alors qu'ils sont réellement \"satisfait\") est relativement faible par rapport aux vrais positifs et auc vrais négatifs. Ces résultats expliquent pourquoi ce modèle a obtenu de bonnes perfomances en termes d'éxactitude.")
-        st.write("De plus, le modèle a également démontré une précision élevée, indiquant qu'il a une faible tendance à prédire les échantillons comme \"satisfait\" ou \"insatisfait\", ainsi qu'un rappel élevé, indiquant qu'il a une faible tendance à manquer les échantillons \"satisfaits\" ou \"insatisfaits\".")
+        st.write("En analysant la matrice de confusion, nous pouvons constater que le nombre de faux positifs (échantillons prédits à tort comme \"satisfaits\" alors qu'ils sont réellement \"insatisfaits\") et de faux négatifs (échantillons prédits à tort comme \"insatisfaits\" alors qu'ils sont réellement \"satisfaits\") est relativement faible par rapport aux vrais positifs et aux vrais négatifs. Ces résultats expliquent pourquoi ce modèle a obtenu des bonnes perfomances en termes d'éxactitude.")
+        st.write("De plus, le modèle a également démontré une précision élevée, indiquant qu'il a une faible tendance à prédire les échantillons comme \"satisfaits\" ou \"insatisfaits\", ainsi qu'un rappel élevé, indiquant qu'il a une faible tendance à manquer les échantillons \"satisfaits\" ou \"insatisfaits\".")
         df = pd.read_csv(r"result_RL.csv")
         from sklearn.metrics import confusion_matrix
         from sklearn.metrics import roc_curve
@@ -706,12 +731,12 @@ elif page == "Modélisation":
         st.plotly_chart(fig, use_container_width=True)
         st.write("La courbe ROC qui se rapproche du coin supérieur gauche du graphique témoigne d'une capactité remarquable du modèle à distinguer avec précision les échantillons positifs des échantillons négatifs, avec un taux élevé de vrais positifs et un taux faible de faux positifs. L'AUC de 96% confirme et renforce cette conclusion, soulignant l'excellente performance du modèle.")
         fpr, tpr, _ = roc_curve(df["Real"], df["Predict_proba1"])
-        diagonal = go.Scatter(x=[0, 1], y=[0, 1], mode='lines', name='Diagonal')
-        fig = go.Figure(data=[go.Scatter(x=fpr, y=tpr, mode='lines', name='ROC curve'), diagonal])
+        diagonal = go.Scatter(x=[0, 1], y=[0, 1], mode='lines', name='Diagonale')
+        fig = go.Figure(data=[go.Scatter(x=fpr, y=tpr, mode='lines', name='Courbe ROC'), diagonal])
         fig.update_layout(
-            title='ROC',
-            xaxis=dict(title='Faux Positif Ratio'),
-            yaxis=dict(title='Vraie Positif Ratio'),
+            title='Courbe ROC (Receiver Operating Characteristic)',
+            xaxis=dict(title='Taux de faux positifs'),
+            yaxis=dict(title='Taux de vrais positifs'),
         )
         
         colroc1,colroc2,colroc3=st.columns(3)
@@ -721,7 +746,7 @@ elif page == "Modélisation":
             st.plotly_chart(fig)
         with colroc3:
             st.write(" ")
-        st.write("Le graphique ci-dessus permet de visualiser la distribution des scores de probabilité pour chaque classe et d'évaluer la séparation entre les deux classes. Il nous aide a déterminer s'il y a un chevauchement entre les distributions des scores de probabilité des deux classes ou s'il existe une séparation claire entre elles.")
+        st.write("Le graphique ci-dessous permet de visualiser la distribution des scores de probabilité pour chaque classe et d'évaluer la séparation entre les deux classes. Il nous aide a déterminer s'il y a un chevauchement entre les distributions des scores de probabilité des deux classes ou s'il existe une séparation claire entre elles.")
         st.write("Cette distinction claire indique une forte capacité de prédiction du modèle, car il est capable de différencier efficacement les échantillons positifs des échantillons négatifs.")
         fig = go.Figure()
         fig.add_trace(go.Histogram(x=df["Predict_proba0"], histnorm='density', name='Classe 0'))
@@ -742,9 +767,9 @@ elif page == "Modélisation":
             
             
         st.markdown("<h5>Interprétabilité du modèle de régression logistique</h5>",unsafe_allow_html=True)
-        st.write("De la même manière que dans l'approche précédente, il est possible d'identifier les mots qui ont exrcé une influence plus importante sur les prédictions.")
+        st.write("De la même manière que dans l'approche précédente, il est possible d'identifier les mots qui ont exercé une influence plus importante sur les prédictions.")
         col12,col22 =st.columns(2)
-        st.write("Le graphique SHAP (SHapley Additive exPlanations) présenté ci-dessous offre une représentation concise des contribution des caractéristiques dans le modèle de régression logistique. Il permet d'identifier les caractéristiques les plus influentes et d'observer leur impact sur les prédictions des classes positives et négatives. La variation de couleurs des points reflète la valeur respective de chaque caracteristique, où le bleu indique une valeur faible et le rouge indisque un valeur élevée. Cette visualisation facilite ainsi l'interpretation de l'importance relative des caractéristiques dans le modèle.")
+        st.write("Le graphique SHAP (SHapley Additive exPlanations) présenté ci-dessous offre une représentation concise de la contribution des caractéristiques dans le modèle de régression logistique. Il permet d'identifier les caractéristiques les plus influentes et d'observer leur impact sur les prédictions des classes positives et négatives. La variation de couleur des points reflète la valeur respective de chaque caracteristique, où le bleu indique une valeur faible et le rouge indique une valeur élevée. Cette visualisation facilite ainsi l'interpretation de l'importance relative des caractéristiques dans le modèle.")
       
         # Chargement des modèles
         RLsave = joblib.load("RL.sav")
@@ -795,26 +820,26 @@ elif page == "Modélisation":
         
         with col22:
             # Création du nuage de mots pour les caractéristiques les plus importantes côté positif
-            st.markdown("<h5>Nuage de Mots pour des caractéristiques les plus importantes côté positif</h5>", unsafe_allow_html=True)
+            st.markdown("<h5>Mots positifs plus influents dans le modèle</h5>", unsafe_allow_html=True)
             fig3 = generate_wordcloud(word_dict_good, False)
             st.pyplot(fig3)
         with col12:
             # Création du nuage de mots pour les caractéristiques les plus importantes côté négatif
-            st.markdown("<h5>Nuage de Mots pour des caractéristiques les plus importantes côté négatif</h5>", unsafe_allow_html=True)
+            st.markdown("<h5>Mots négatifs plus influents dans le modèle</h5>", unsafe_allow_html=True)
             fig2 = generate_wordcloud(word_dict_bad, True)
             st.pyplot(fig2)
         
         
         st.write("Le graphique ci-dessous présente l'influence de chaque caractéristique sur la prédiction du modèle pour un exemple spécifique. Les barres verticales indiquent l'importance de chaque caractéristique, avec du bleu pour une contribution négative et du rouge pour une contribution positive. La valeur de base du modèle est représentée par le point central, et les valeurs SHAP sont ajoutées ou soustraites pour obtenir la prédiction finale.")
         masker = shap.maskers.Independent(X)
-        st.markdown("**Le Commentaire en question**")
+        st.markdown("**Commentaire:**")
         st.write(df.commentaire[0])
         explainer = shap.LinearExplainer(model,masker,feature_names=TRLsave.get_feature_names_out())
         shap_values = explainer.shap_values(X)
         st_shap(shap.force_plot(explainer.expected_value, shap_values[0,:], X_display[0],feature_names=TRLsave.get_feature_names_out()), height=200, width=1000)
-        st.write("Il est également possible d'utiliser d'autres packages d'interprétabilité locale tels que ELI5(Explain Like I'm 5) pour comprendre pouquoi un avis spécifique a été classé comme positif ou négatif.")
+        st.write("Il est également possible d'utiliser d'autres packages d'interprétabilité locale tels que ELI5(Explain Like I'm 5) pour comprendre pourquoi un avis spécifique a été classé comme positif ou négatif.")
         st.write("L'exemple ci-dessous présente les informations relatives à la contribution des caractéristiques spécifiques dans la prédiction d'un exemple particulier. Dans cet exemple, la valeur cible (y) est égale à 1 avec une probabilité de 0.999 et un score de 6,647.")
-        st.write("La colonne \"Contribution\" indique l'impact relatif de chaque caractéristique sur la prédiction finale. Une valeur positive indique une contribution positiven ce qui signifie que la présence ou l'occurence de cette caractéristique a eu un effet positif sur la prédiction de la classe cible. Une valeur négative indiquerait une contribution négative.")
+        st.write("La colonne \"contribution\" indique l'impact relatif de chaque caractéristique sur la prédiction finale. Une valeur positive indique une contribution positive, ce qui signifie que la présence ou l'occurence de cette caractéristique a eu un effet positif sur la prédiction de la classe cible. Une valeur négative indiquerait une contribution négative.")
         text="""
 <style>
     table.eli5-weights tr:hover {
@@ -1094,9 +1119,9 @@ style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: a
 </p>
         """
         st.markdown(text, unsafe_allow_html=True)
-        st.markdown("<h5>Et si on cherchait à améliorer nos résultats avec un modèle de Deep Learning?</h5>", unsafe_allow_html=True)
+        st.markdown("<h5>Et si on cherchait à améliorer les résultats avec un modèle de Deep Learning?</h5>", unsafe_allow_html=True)
         st.markdown("<h6>Modèle pré-entraîné : Distilcamembert Base Sentiment</h6>", unsafe_allow_html=True)
-        st.markdown("Distilcamembert Base Sentiment (<a href=\"https://huggingface.co/cmarkea/distilcamembert-base-sentiment\">lien</a>) est le nom d'un modèle pré-entraîné pour l'analyse de sentiments en utilisant le langage naturel. Ce modèle est basé sur la variante \"DistilCamembert\" qui est une version compacte et légère du modèle \"Camembert\". Il a été entraîné sur une large quantité de données textuelles pour prédire les sentiments associés à des commentaires ou des phrases. En utilisant ce modèle pré-entraîné, il est possible de bénéficier des avantages de la représentation du langage apprise à partir de grandes quantités de données, sans avoir à entraîner un modèle à partir de zéro. Ce modèle permet d'obtenir une accuracy de 91%.", unsafe_allow_html=True)
+        st.markdown("Distilcamembert Base Sentiment (<a href=\"https://huggingface.co/cmarkea/distilcamembert-base-sentiment\">lien</a>) est le nom d'un modèle pré-entraîné pour l'analyse de sentiments en utilisant le langage naturel. Ce modèle est basé sur la variante \"DistilCamembert\" qui est une version compacte et légère du modèle \"Camembert\". Il a été entraîné sur une large quantité de données textuelles pour prédire les sentiments associés à des commentaires ou des phrases. En utilisant ce modèle pré-entraîné, il est possible de bénéficier des avantages de la représentation du langage apprise à partir de grandes quantités de données, sans avoir à entraîner un modèle à partir de zéro.", unsafe_allow_html=True)
         col1dis,col2dis=st.columns(2)
         with col1dis:
             # Obtenez la matrice de confusion
@@ -1119,18 +1144,18 @@ style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: a
         with col2dis:
             report_data = {'Precision': [0.82, 0.98], 'Recall': [0.96, 0.85], 'F1-score': [0.89, 0.92], 'Support': [3092, 5205]}
             st.write("Accuracy:", 0.91)
-            st.write("Classification Report:")
+            st.write("Rapport de classification:")
             st.table(report_data)
           
             
         st.markdown("<h6>Modèle de réseau de neurones : Multilayer Perceptron </h6>", unsafe_allow_html=True)
-        st.write("L'utilisation d'un Multilayer Perceptron (MLP) dans l'analyse de texte offre plusieurs avantages. Il est capable de capturer des relations complexes et non linéaires dans le texte, permettant ainsi une compréhension plus précise de la sémantique et du sens des phrases. De plus, le MLP peut être entraîné sur de grandes quantités de données, ce qui lui permet d'acquérir une connaissance approfondie des modèles linguistiques et de généraliser efficacement à de nouveaux exemples. Sa flexibilité en termes de taille et de complexité du modèle permet de trouver un équilibre optimal entre la capacité à capturer des informations complexes et la généralisation.")
-        report_data = {'Nombre d\'épochs': [4, "En limitant le nombre d'epochs à 4, on prévient l'apparition du surapprentissage qui tend à se manifester au-delà de 4 ou 5 épochs."],
+        st.write("L'utilisation d'un Multilayer Perceptron (MLP) dans l'analyse de texte offre plusieurs avantages. Il est capable de capturer des relations complexes et non linéaires dans le texte, permettant ainsi une compréhension plus précise de la sémantique et du sens des phrases. De plus, le MLP peut être entraîné sur de grandes quantités de données, ce qui lui permet d'acquérir une connaissance approfondie des modèles linguistiques et de généraliser efficacement à des nouveaux exemples. Sa flexibilité en termes de taille et de complexité du modèle permet de trouver un équilibre optimal entre la capacité à capturer des informations complexes et la généralisation.")
+        report_data = {'Nombre d\'époques': [4, "En limitant le nombre d\'époques à 4, on prévient l'apparition du surapprentissage qui tend à se manifester au-delà de 4 ou 5 épochs."],
                        'Batchsize': [30, "Étant donné que le modèle est complexe et que le jeu de données est volumineux, il est essentiel de trouver un compromis optimal pour le batch size. Une valeur de 30 semble être un bon choix, car elle permet de capturer un échantillon représentatif de l'ensemble des données disponibles, sans être trop grand ni trop petit."],
                        'Optimiseur': ["Adam", "L'algorithme Adam est réputé pour faciliter l'ajustement des hyperparamètres et améliorer la précision des modèles MLP. Il s'agit d'un choix couramment utilisé dans la construction de ces modèles, pouvant être considéré comme une option fondamentale."],
                        'Fonction de perte': ["Binary Cross-Entropy", " Etant donné que le modèle doit prédire deux classes distinctes, il est logique d'opter pour une classification binaire. L'objectif est de pouvoir différencier efficacement les deux classes et réduire au maximum les erreurs de classification."],
-                      "Métrique":["Accuracy","L'objectif principal est d'améliorer la précision globale (accuracy) quelle que soit la sélection des modèles. Cela est également indirectement lié à la fonction de perte utilisée. Par la suite,  les résultats obtenus pour d'autres mesures telles que le F1-score ou le Recall seront examinés et pris en compte pour évaluer les performances globales."],
-                       "Dimension d'embedding":[16,"Une exploration empirique a permis d'approximer de manière fiable le meilleur paramètre sans compromettre nos résultats, évitant ainsi une charge excessive en termes de temps et de mémoire."]}
+                      "Métrique":["Accuracy","L'objectif principal est d'améliorer la précision globale (accuracy) quelle que soit la sélection des modèles. Cela est également indirectement lié à la fonction de perte utilisée. Par la suite,  les résultats obtenus pour d'autres mesures telles que le F1-score ou le rappel seront examinés et pris en compte pour évaluer les performances globales."],
+                       "Dimension d'embedding":[16,"Une exploration empirique a permis d'approximer de manière fiable le meilleur paramètre sans compromettre les résultats, évitant ainsi une charge excessive en termes de temps et de mémoire."]}
         st.write("Le modèle MLP optimisé comprend les hyperparamètres suivants : ")
         st.table(report_data)
         st.write("Ce modèle utilise une couche d'embedding pour représenter les mots de manière dense, suivie d'une couche de pooling globale en moyenne pour réduire la dimensionnalité des données. Ensuite, une couche dense avec une activation ReLU est ajoutée pour capturer des relations complexes. Enfin, une dernière couche dense avec une activation sigmoïde est utilisée pour effectuer une classification binaire. Ce modèle permet de transformer les mots en vecteurs significatifs, de réduire la complexité du modèle, d'apprendre des représentations complexes et de prédire la classe d'un texte. ")
@@ -1180,7 +1205,7 @@ style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: a
 
             # Set the layout
             fig.update_layout(
-                title="Model Architecture",
+                title="Architecture du modèle",
                 xaxis=dict(showticklabels=False),
                 yaxis=dict(showticklabels=False),
                 showlegend=False,
@@ -1192,11 +1217,10 @@ style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: a
             st.plotly_chart(fig)
 
         
-  
+
 
         plot_model_architecture()
 
-        
 
         st.write("La matrice de confusion obtenue ainsi que le rapport de classification confirment la capacité du modèle à effectuer une classification précise des classes. ")
         col1disBIS,col2disBIS=st.columns(2)
@@ -1221,7 +1245,7 @@ style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: a
         with col2disBIS:
             report_data = {'Precision': [0.90, 0.92], 'Recall': [0.87, 0.94], 'F1-score': [0.88, 0.93], 'Support': [3092, 5205]}
             st.write("Accuracy:", 0.91)
-            st.write("Classification Report:")
+            st.write("Rapport de classification:")
             st.table(report_data)
         st.markdown("<h5>Troisième approche: intégrant à la fois l'analyse des commentaires et les variables collectées et créées (Bagging) </h5>", unsafe_allow_html=True)
         st.write("Le modèle final choisi pour répondre à l'objectif de classification de la satisfaction client utilise la technique d'ensemble appelée bagging. Cette approche combine efficacement trois modèles distincts : un MultiLayer Perceptron (MLP), une régression logistique et une forêt aléatoire.  ")
@@ -1233,11 +1257,11 @@ style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: a
         st.write("Les différentes métriques du modèle confirment qu'il s'agit du meilleur modèle obtenu à ce jour. L'utilisation du bagging a considérablement renforcé les prédictions par rapport aux résultats des modèles individuels. Toutefois, il est important de noter que le modèle rencontre certaines difficultés lorsqu'il s'agit de classer précisément les clients insatisfaits (classe 0), étant donné leur représentation moins fréquente dans les données collectées. ")
         report_data = {'Precision': [0.87, 0.94], 'Recall': [0.90, 0.93], 'F1-score': [0.89, 0.93], 'Support': [3001, 5296]}
         st.write("Accuracy:", 0.916)
-        st.write("Classification Report:")
+        st.write("Rapport de classification:")
         st.table(report_data)
         st.markdown("<h5>Quatrième approche :  basée sur la prédiction des notes attribuées </h5>", unsafe_allow_html=True)
         st.write("Afin de prédire la note attribuée par les clients en fonction de leurs avis, un modèle de réseau de neurones artificiels a été entraîné. Pour ce faire, une étape préliminaire de traitement du texte a été effectuée, comprenant une tokenisation suivie d'un remplacement par des embeddings. ")
-        st.write("Pour remédier au déséquilibre des classes, la technique de RandomOverSampler a été utilisée pour obtenir un nombre égal d'échantillons pour chaque classe de notes. Cette approche a été motivée par l'observation d'une préférence des utilisateurs pour des notes extrêmes plutôt que des notes intermédiaires. ")
+        st.write("Pour remédier au déséquilibre des classes, la technique de RandomOverSampler a été utilisée pour obtenir un nombre égal d'échantillons pour chaque note. Cette approche a été motivée par l'observation d'une préférence des utilisateurs pour des notes extrêmes plutôt que des notes intermédiaires. ")
         st.write("Le modèle lui-même est composé de plusieurs couches : ")
         st.markdown("""
         1. La couche d'embedding est utilisée pour transformer les séquences d'entiers en vecteurs d'embeddings.  
@@ -1253,9 +1277,9 @@ style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: a
                        'F1-score': [0.92,0.97,0.90,0.72,0.64],
                        'Support': [3988,4008,3945,4007,4101]}
         st.write("Accuracy:", 0.83)
-        st.write("Classification Report:")
+        st.write("Rapport de classification:")
         st.table(report_data)
-        st.write("Les résultats du modèle sont particulièrement médiocres pour la classe 5, ce qui peut être attribué au fait que les utilisateurs qui attribuent cette note tendent à laisser des commentaires plus courts par rapport aux clients insatisfaits. Le prétraitement du texte, y compris la suppression des mots vides (stop words), peut pénaliser les commentaires courts, tels que ceux contenant simplement \"très bien\". Cette suppression peut entraîner une perte d'informations précieuses dans les commentaires courts et affecter négativement les performances du modèle pour la classe 5. ")
+        st.write("Les résultats du modèle sont particulièrement médiocres pour la classe 5, ce qui peut être attribué au fait que les utilisateurs qui donnent cette note tendent à laisser des commentaires plus courts par rapport aux clients insatisfaits. Le prétraitement du texte, y compris la suppression des mots vides (stop words), peut pénaliser les commentaires courts, tels que ceux contenant simplement \"très bien\". Cette suppression peut entraîner une perte d'informations précieuses dans les commentaires courts et affecter négativement les performances du modèle pour la classe 5. ")
     with subtab_id :
         st.markdown("<h3 class='center'>Identification du sujet abordé dans les commentaires : approche non supervisée</h3>",unsafe_allow_html=True)
         st.write("Afin d'identifier les principaux sujets abordés dans les avis des utilisateurs, l'algorithme de clustering K-Means a été appliqué. La démarche du K-Means comprend plusieurs étapes, comme illustré dans la figure ci-dessous : ")
@@ -1263,12 +1287,12 @@ style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: a
         st.write("Cette approche permet de détecter les principaux problèmes qui contribuent à l'insatisfaction des utilisateurs sur les quatre plateformes de commerce électronique étudiées. En regroupant les avis similaires en clusters, nous pouvons identifier les sujets récurrents et les problèmes les plus fréquemment mentionnés par les utilisateurs mécontents. Cela permettra aux entreprises d'identifier les domaines à améliorer et de prendre des mesures pour résoudre ces problèmes spécifiques, afin d'améliorer l'expérience utilisateur et la satisfaction globale.")
         st.write("Le tableau présenté ci-dessous résume les problèmes identifiés pour les utilisateurs mécontents, ainsi que les motifs de satisfaction pour les clients satisfaits :")
         report_data = {
-            'Avis': ['Négatifs', 'Négatifs', 'Négatifs', 'Négatifs', 'Positifs', 'Positifs'],
-            'Numéro de Cluster': [0, 1, 2, 3, 0, 1],
+            'Type d\'avis': ['Négatifs', 'Négatifs', 'Négatifs', 'Négatifs', 'Positifs', 'Positifs'],
+            'Numéro de cluster': [0, 1, 2, 3, 0, 1],
             'Problème identifié': [
                 "Contact difficile service client",
                 "Mauvaise qualité service client",
-                "Insatisfaction Service Après-Vente, Mauvaise Qualité Produit",
+                "Insatisfaction Service Après-Vente, Mauvaise qualité produit",
                 "Délai de livraison, Point de livraison",
                 "Rapidité service de livraison",
                 "Bonne qualité service client, Bon rapport qualité prix"
@@ -1281,8 +1305,9 @@ style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: a
 elif page == "Chatbot":
     st.runtime.legacy_caching.clear_cache()
     st.markdown("<h4 class='center'>Cas pratique de l’analyse des verbatims : création d’un chatbot</h4>",unsafe_allow_html=True)
-    st.write("L'objectif principal du chatbot est d'utiliser les résultats du modèle de bagging pour analyser la réponse du client, classifier son commentaire comme étant positif ou négatif, et identifier le cluster auquel il appartient.")
+    st.write("L'objectif principal du chatbot est d'utiliser les résultats du modèle de bagging pour analyser la réponse du client, classifier son commentaire comme étant positif ou négatif et identifier le cluster auquel il appartient.")
     st.write("Par exemple, si le commentaire est identifié comme étant négatif et appartenant au cluster 0, le chatbot fournira une réponse spécifique préalablement préparée pour répondre au client de manière systématique.") 
+    st.write("Veuillez cliquer sur le lien ci-dessous pour utiliser le chatbot:")
     st.markdown(
         """
         <style>
@@ -1356,6 +1381,7 @@ elif page == "Conclusion et Perspectives":
     1. Améliorer l'identification des principaux sujets abordés par les clients. 
     2. Améliorer le modèle de prédiction de la note attribuée par le client. 
     3. Étendre le projet à plusieurs langues.
+    4. Mettre en place un système de collecte des commentaires réalisés par les clients dans le chatbot pour constituer une base de données incluant les commentaires et les prédictions de celui-ci, permettant ainsi d'améliorer progressivement le modèle et les réponses fournies aux clients.
     """)
     st.write("En poursuivant ces pistes d'amélioration, le projet pourrait aboutir à des résultats plus précis et pertinents, offrant ainsi une meilleure compréhension de la satisfaction client dans différentes langues et permettant de prendre des décisions plus éclairées pour améliorer l'expérience client.")
 
