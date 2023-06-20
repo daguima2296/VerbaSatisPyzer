@@ -1187,14 +1187,10 @@ style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: a
             st.plotly_chart(fig)
 
         
-        colmod1,colmod2,colmod3=st.columns(3)
-        with colmod1:
-            st.write(" ")
-        with colmod2:
-            # Run the function to display the model architecture
-            plot_model_architecture()
-        with colmod3:
-            st.write(" ")
+
+        st.markdown("<div class='center'>",unsafe_allow_html=True)
+        plot_model_architecture()
+        st.markdown("</div>",unsafe_allow_html=True)
 
         st.write("La matrice de confusion obtenue ainsi que le rapport de classification confirment la capacité du modèle à effectuer une classification précise des classes. ")
         col1disBIS,col2disBIS=st.columns(2)
