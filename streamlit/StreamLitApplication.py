@@ -604,11 +604,11 @@ elif page == "Modélisation":
                         st.write('- ', selected_options[i])
                         Data(selected_options[i])
         st.write("Les résultats obtenus mettent en évidence que le modèle de forêts aléatoires affiche la plus haute performance avec 87.71% pour les données d'entraînement et 89.14% pour les données de test. De plus, le F1-score, qui offre une mesure équilibrée entre la précision et le rappel, présente également les meilleurs résultats avec 89% pour les deux classes(clients insatisfait, satisfaits).")
-        st.write("Il est tout aussi pertinent de noter les variables ayant une influence significative sur les résultats de classification. On constate que le nombre de mots utilisés dans l'avis joue un rôle prépondérant dans la prédiction, de même que les vraibales issues des NER(Named Entity Recognition) et POS (Part-of-Speech). En revanche, le jour de la semaine où l'avis a été publié ainsi que les bigrammes semblent avoir une influence moindre sur la prédiction.")
+        st.write("Il est tout aussi pertinent de noter les variables ayant une influence significative sur les résultats de classification. On constate que le nombre de mots utilisés dans l'avis joue un rôle prépondérant dans la prédiction, de même que les variables issues des NER(Named Entity Recognition) et POS (Part-of-Speech). En revanche, le jour de la semaine où l'avis a été publié ainsi que les bigrammes semblent avoir une influence moindre sur la prédiction.")
         df = pd.read_csv(r"feature_importances.csv")
         fig1 = go.Figure(data=[go.Bar(x=df.Feature, y=df.Importance, marker_color="#E61B1B")])
         # Définir le titre et les étiquettes des axes
-        fig1.update_layout(title='Importances des parametres', xaxis_title='',yaxis_title='Importance')
+        fig1.update_layout(title='Variables plus significatives', xaxis_title='',yaxis_title='Importance')
         st.plotly_chart(fig1, use_container_width=True)
         st.markdown("<h5>Deuxieme approche : basée uniquement sur l'analyse des avis </h5>",unsafe_allow_html=True)
         st.write("Afin de permettre aux algorithmes de machine learning et de deep learning d'interpréter les commentaires, il est essentiel de les convertir en vecteurs numériques représentant les informations textuelles. Deux techniques de vectorisation de texte sont couramment utilisées dans l'analyse de commentaires : le TF-IDF(Term Frequency-Inverse Document Frequency) et le Count Vectorizer.")
