@@ -615,14 +615,14 @@ elif page == "Modélisation":
         st.write("Le TF-IDF tient compte de la fréquence et de l'importance des mots dans un document et dans le corpus, tandis que le Count Vectorizer se contente de compter le nombre d'occurences des mots dans chaque document.")
         
         # Titre de l'application
-        st.write("Comparaison entre TF-IDF et CountVectorizer")
+        st.write("Exemple d'utilisation du TF-IDF et du Count Vectorizer")
         texte = """
         Au voleur ! au voleur ! à l'assassin ! au meurtrier ! Justice, juste Ciel ! je suis perdu, je suis assassiné, on m'a coupé la gorge, on m'a dérobé mon argent. Qui peut-ce être ? Qu'est-il devenu ? Où est-il ? Où se cache-t-il ? Que ferai-je pour le trouver? Où courir? Où ne pas courir? N'est-il point là ? N'est-il point ici ? Qui est-ce ? Arrête. Rends-moi mon argent, coquin. 
         """
-        vecteurizer_choice = st.selectbox("Choisissez un vecteurizer", ("CountVectorizer", "TF-IDF"))
+        vecteurizer_choice = st.selectbox("Choisissez un vectorisateur", ("Count Vectorizer", "TF-IDF"))
         min_df = 1
         max_features = st.slider("Max_features (nombre maximal de mots)", 10, 200, 5)
-        if vecteurizer_choice == "CountVectorizer":
+        if vecteurizer_choice == "Count Vectorizer":
             vecteurizer = CountVectorizer(min_df=min_df, max_features=max_features)
         else:
             vecteurizer = TfidfVectorizer(min_df=min_df, max_features=max_features)
@@ -635,7 +635,7 @@ elif page == "Modélisation":
         with colvec:
             st.write("Matrice de vecteurs :")
             st.write(vecteurs.toarray())
-            if vecteurizer_choice != "CountVectorizer":
+            if vecteurizer_choice != "Count Vectorizer":
                 # Explication de TF-IDF
                 st.subheader("TF-IDF (Term Frequency-Inverse Document Frequency)")
                 
