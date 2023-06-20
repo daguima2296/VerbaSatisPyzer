@@ -310,15 +310,27 @@ elif page == "Analyse exploratoire":
         fig.update_layout(title="Nombre d'avis par jour de la semaine")
         st.plotly_chart(fig, use_container_width=True)
     with col24:
-        # Groupement des données par année de l'avis et calcul de la moyenne du nombre d'étoiles
+        jours_semaine_ordre = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+        dfData['jour_semaine_comm'] = pd.Categorical(dfData['jour_semaine_comm'], categories=jours_semaine_ordre, ordered=True)
+        dfData['jour_semaine_exp'] = pd.Categorical(dfData['jour_semaine_exp'], categories=jours_semaine_ordre, ordered=True)
+        
+        # Groupement des données par jour de la semaine du commentaire et calcul de la moyenne du nombre d'étoiles
         stars_by_day_comm = dfData.groupby('jour_semaine_comm')['note'].mean()
-        # Groupement des données par année de l'expérience et calcul de la moyenne du nombre d'étoiles
+        
+        # Groupement des données par jour de la semaine de l'expérience et calcul de la moyenne du nombre d'étoiles
         stars_by_day_exp = dfData.groupby('jour_semaine_exp')['note'].mean()
+        
         fig = go.Figure()
-        fig = go.Figure(data=[go.Bar(name="Jour du commentaire",x=stars_by_day_comm.index, y=stars_by_day_comm, marker_color="#44D4A8"),
-                              go.Bar(name="Jour de l'expérience",x=stars_by_day_comm.index,  y=stars_by_day_comm, marker_color="#D44470")])
-        fig.update_layout(title="Note moyenne par jour de la semaine", xaxis_title='Jour de la semaine',
-                           yaxis_title="Note moyenne",yaxis_range=[0, 5.5])
+        fig = go.Figure(data=[
+            go.Bar(name="Jour du commentaire", x=stars_by_day_comm.index, y=stars_by_day_comm, marker_color="#44D4A8"),
+            go.Bar(name="Jour de l'expérience", x=stars_by_day_exp.index, y=stars_by_day_exp, marker_color="#D44470")
+        ])
+        fig.update_layout(
+            title="Note moyenne par jour de la semaine",
+            xaxis_title='Jour de la semaine',
+            yaxis_title="Note moyenne",
+            yaxis_range=[0, 5.5]
+        )
         st.plotly_chart(fig, use_container_width=True)
     st.write("La majorité des avis sont très concis, contenant moins de 10 mots, tandis qu'il y a peu de personnes qui laissent des avis de plus de 50 mots. ")
     st.write("En analysant la note moyenne en fonction du nombre de mots dans l'avis, il est possible de constater que les clients les plus satisfaits sont ceux qui rédigent des commentaires courts, tandis que ceux qui expriment leur mécontentement sont enclins à laisser des commentaires plus longs.")
