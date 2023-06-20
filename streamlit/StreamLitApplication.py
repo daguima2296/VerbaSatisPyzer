@@ -477,7 +477,7 @@ elif page == "Analyse exploratoire":
                             mode='lines',
                             name=i))
 
-        fig.update_layout(title="Note moyenne par entité nommée ou étiquette gramaticale", xaxis_title="Pourcentage d/'entité nommée ou étiquette gramaticale",
+        fig.update_layout(title="Note moyenne par entité nommée ou étiquette gramaticale", xaxis_title="Pourcentage entité nommée ou étiquette gramaticale",
                        yaxis_title="Note moyenne")
         st.plotly_chart(fig, use_container_width=True)
     st.markdown("<h3 class='center'>Résumé et interpretation</h3>",unsafe_allow_html=True)
