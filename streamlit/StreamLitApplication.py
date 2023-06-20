@@ -636,7 +636,7 @@ elif page == "Modélisation":
         st.write(texte)
         colvoc,colvec=st.columns([1,3])
         with colvoc:
-            st.write("Vocabulaire :", vecteurizer.get_feature_names_out())
+            st.write("Vocabulaire :", {"Mots":vecteurizer.get_feature_names_out()})
         with colvec:
             st.write("Matrice de vecteurs :")
             st.write(vecteurs.toarray())
