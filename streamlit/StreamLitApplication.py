@@ -280,11 +280,11 @@ elif page == "Analyse exploratoire":
         exp_counts = pd.DataFrame({"Annee Experience":
             dfData['annee_exp'].value_counts(normalize=True) * 100})
         # Créer un diagramme à barres à partir des données du nouveau DataFrame
-        fig3 = go.Figure(data=[go.Bar(name="Commentaire",x=comm_counts.index, y=comm_counts['Annee Commentaire'], marker_color="#44D4A8", text=comm_counts['Annee Commentaire'].round(2).astype(str) + '%', textposition='outside', textfont=dict(size=14)),
-                              go.Bar(name="Experience",x=exp_counts.index, y=exp_counts['Annee Experience'], marker_color="#D44470", text=exp_counts['Annee Experience'].round(2).astype(str) + '%', textposition='outside', textfont=dict(size=14))])
+        fig3 = go.Figure(data=[go.Bar(name="Année du commentaire",x=comm_counts.index, y=comm_counts['Annee Commentaire'], marker_color="#44D4A8", text=comm_counts['Annee Commentaire'].round(2).astype(str) + '%', textposition='outside', textfont=dict(size=14)),
+                              go.Bar(name="Année de l'expérience",x=exp_counts.index, y=exp_counts['Annee Experience'], marker_color="#D44470", text=exp_counts['Annee Experience'].round(2).astype(str) + '%', textposition='outside', textfont=dict(size=14))])
         # Définir le titre et les étiquettes des axes
-        fig3.update_layout(title='Répartition des commentaire/experience par année', xaxis_title='Annee ',
-                           yaxis_title='Pourcentage de commentaires/experience', yaxis_range=[0, max(comm_counts['Annee Commentaire']) + 10])
+        fig3.update_layout(title='Répartition des avis utilisateurs par année', xaxis_title='Année ',
+                           yaxis_title='Pourcentage des avis par année', yaxis_range=[0, max(comm_counts['Annee Commentaire']) + 10])
         st.plotly_chart(fig3, use_container_width=True)
     with col23:
         # Groupement des données par année de l'avis et calcul de la moyenne du nombre d'étoiles
