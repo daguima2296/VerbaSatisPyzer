@@ -1188,8 +1188,17 @@ style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: a
             st.plotly_chart(fig)
 
         
+        col1, col2, col3 = st.beta_columns([1,6,1])
 
-        plot_model_architecture()
+        with col1:
+            st.write("")
+        
+        with col2:
+            plot_model_architecture()
+        
+        with col3:
+            st.write("")
+        
 
         st.write("La matrice de confusion obtenue ainsi que le rapport de classification confirment la capacité du modèle à effectuer une classification précise des classes. ")
         col1disBIS,col2disBIS=st.columns(2)
