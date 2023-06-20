@@ -220,7 +220,7 @@ elif page == "Analyse exploratoire":
         fig1 = go.Figure(data=[go.Bar(x=note_counts.index, y=note_counts['note'], marker_color=colorsgraph,
                          text=note_counts['note'].round(2).astype(str) + '%', textposition='outside', textfont=dict(size=14))])
         # Définir le titre et les étiquettes des axes
-        fig1.update_layout(title='Nombre d\'occurrences de chaque note '+str(datasel), xaxis_title='note',
+        fig1.update_layout(title='Nombre d\'occurrences de chaque note '+str(datasel), xaxis_title='Note attribuée',
                            yaxis_title='Pourcentage d\'occurrences', yaxis_range=[0, max(note_counts['note']) + 10])
         st.plotly_chart(fig1, use_container_width=True)  
     col12,col22 = st.columns([5,3])
