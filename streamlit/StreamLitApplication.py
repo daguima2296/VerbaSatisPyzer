@@ -515,8 +515,8 @@ elif page == "Modélisation":
         st.write("Ce projet vise principalement à atteindre deux objectifs majeurs : tout d'abord, prédire le niveau de satisfaction des clients en les classant comme satisfaits ou insatisfaits grâce à une approche supervisée. Ensuite, il s'agit d'identifier les sujets abordés dans les commentaires sans avoir de pré-étiquetage spécifique, en utilisant une approche non supervisée.")
         st.write("Pour atteindre le premier objectif, plusieurs approches ont été envisagées :")
         st.markdown("""
-            1. Une approche basée uniquement sur les variables collectées grâce au web scraping, ainsi que sur les variables créées à partir de ces données, en utilisant des modèles de machine learning.
-            2. Une approche axée exclusivement sur l'analyse des commentaires en utilisant des techniques couramment utilisées dans le traitement du langage naturel, telles que le count vectorizer et le TF-IDF. Ces techniques permettent de convertir les textes en données exploitables par des algorithmes d'apprentissage automatique et de deep learning, comme les réseaux de neurones. 
+            1. Une approche basée uniquement sur les variables collectées grâce au web scraping, ainsi que sur les variables créées à partir de ces données en utilisant des modèles de machine learning.
+            2. Une approche axée exclusivement sur l'analyse des commentaires en utilisant des techniques couramment utilisées dans le traitement du langage naturel, telles que le count vectorizer et le TF-IDF. Ces techniques permettent de convertir les textes en données exploitables par des algorithmes d'apprentissage automatique et de deep learning comme les réseaux de neurones. 
             3. Une approche combinant les deux approches précédentes, en intégrant à la fois l'analyse des commentaires et les variables collectées et créées. 
             4. Une approche basée sur l'analyse des notes attribuées plutôt que sur la satisfaction ou l'insatisfaction du client.
             """)
